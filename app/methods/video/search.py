@@ -3,6 +3,6 @@ from ...db.db import get_db
 
 router = APIRouter(prefix='/search')
 
-@router.get("/{keyword}")
+@router.get("/")
 def search(keyword: str):
-    pass
+    col = get_db().get_collection('keyword')
