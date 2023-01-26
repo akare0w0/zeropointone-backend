@@ -15,3 +15,6 @@ def is_vaild_strs(strings: List[str]) -> bool:
         if not is_vaild_str(i):
             return False
     return True
+
+def isVaildEmail(string: str):
+    return True

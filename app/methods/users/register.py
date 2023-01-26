@@ -1,7 +1,7 @@
 from fastapi import APIRouter
-from ...db.data_filter import isVaildEmail, isVaildStr
+from ...db.data_filter import isVaildEmail, is_vaild_str
 from ...db.db import get_db
-from ...sha.sha import toSha256
+from ...sha.sha import to_sha256
 
 router = APIRouter(prefix="/register")
 
@@ -19,7 +19,7 @@ async def register(email: str, account: str, password: str, confirm_password: st
     }
     if not isVaildEmail(email): #判断邮箱是否合法
         result['email_vaild'] = False
-    elif (not isVaildStr(account)) or (not isVaildStr(password)): #判断用户名和密码是否合法
+    elif (not is_vaild_str(account)) or (not is_vaild_str(password)): #判断用户名和密码是否合法
         result['vaild'] = False
     elif password != confirm_password:
         result['confirmed'] = False
@@ -30,7 +30,7 @@ async def register(email: str, account: str, password: str, confirm_password: st
         col = get_db().get_collection('users')
         data = col.find_one(document)
         if data == None: #判断用户是否已经存在
-            col.insert_one({'account':account, 'password':toSha256(password)})
+            col.insert_one({'account':account, 'password':to_sha256(password)}) 
         else:
             result['beforeRegister_exists'] = True
     
