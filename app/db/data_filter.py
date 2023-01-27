@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 from rapidfuzz.fuzz import partial_ratio, partial_token_set_ratio
 from jieba  import lcut
 
@@ -14,7 +14,7 @@ def is_vaild_str(string: str) -> bool:
             return False
     return True
 
-def is_vaild_strs(strings: List[str]) -> bool:
+def is_vaild_strs(strings: List[str] | Tuple[str]) -> bool:
     for i in strings:
         if not is_vaild_str(i):
             return False
