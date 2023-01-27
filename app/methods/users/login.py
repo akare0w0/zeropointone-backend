@@ -3,7 +3,7 @@ from fastapi import APIRouter
 # 切记一定要像这样引用 不然会出问题
 from ...sha.sha import to_sha256
 # 导入数据库
-from ...db.db import get_db
+from ...db.db import get_client
 # 导入验证器
 from ...db.data_filter import is_vaild_str
 
@@ -33,14 +33,14 @@ async def login(account: str, password: str):
             'password': to_sha256(password), #加密重要信息
         }
         # 获取指定数据库（db@1_22)中的指定collection（集合）
-        col = get_db().get_collection('users')
+        users_db = get_client()['users']
         # 查找跟上面的document信息一样的数据
-        data = col.find_one(document)
+        data = users_db.get_collection("users").find_one(document)
         # 为空 -> 不存在
         if data == None:
             result['exists'] = False
         # 密码不一样
-        elif col.find_one({ 'account': account }).password != password:
+        elif users_db.get_collection("users").find_one({ 'account': account }).password != password:
             result['wrong'] = True
         # 全部通过 返回用户具体信息
         else:
