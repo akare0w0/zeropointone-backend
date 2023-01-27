@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from ...db.db import get_client
+from ..db.db import get_client
 
 router = APIRouter(prefix='/search_fuzz')
 
