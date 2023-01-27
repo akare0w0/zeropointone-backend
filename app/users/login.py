@@ -24,7 +24,7 @@ async def login(account: str, password: str):
         data = col.find_one({ 'account': account }, { '_id': 0 })
         if data == None:
             result['exists'] = False
-        elif data['password'] != password:
+        elif data['password'] != to_sha256(password):
             result['wrong'] = True
         else:
             result['user'] = data
