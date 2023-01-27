@@ -35,15 +35,15 @@ async def login(account: str, password: str):
         # 获取指定数据库（db@1_22)中的指定collection（集合）
         users_db = get_client()['users']
         # 查找跟上面的document信息一样的数据
-        data = users_db.get_collection("users").find_one(document)
+        col = users_db.get_collection("users")
         # 为空 -> 不存在
-        if data == None:
+        if col.find_one(document) == None:
             result['exists'] = False
         # 密码不一样
         elif users_db.get_collection("users").find_one({ 'account': account }).password != password:
             result['wrong'] = True
         # 全部通过 返回用户具体信息
         else:
-            result['user'] = data
+            result['user'] = col
     # 返回值
     return result

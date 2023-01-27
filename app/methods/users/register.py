@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from ...db.data_filter import isVaildEmail, is_vaild_str
-from ...db.db import get_db
+from ...db.db import get_client
 from ...sha.sha import to_sha256
 
 router = APIRouter(prefix="/register")
@@ -27,7 +27,8 @@ async def register(email: str, account: str, password: str, confirm_password: st
         document = {
             'account': account
         }
-        col = get_db().get_collection('users')
+        users_db = get_client()["users"]
+        col = users_db.get_collection("users")
         data = col.find_one(document)
         if data == None: #判断用户是否已经存在
             col.insert_one({'account':account, 'password':to_sha256(password)}) 
