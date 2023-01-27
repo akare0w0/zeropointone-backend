@@ -32,7 +32,7 @@ async def login(account: str, password: str):
             'account': account,
             'password': to_sha256(password), #加密重要信息
         }
-        # 获取指定数据库（db@1_22)中的指定collection（收藏品）
+        # 获取指定数据库（db@1_22)中的指定collection（集合）
         col = get_db().get_collection('users')
         # 查找跟上面的document信息一样的数据
         data = col.find_one(document)
