@@ -4,7 +4,7 @@ import jieba
 
 router = APIRouter(prefix='/search_jieba')
 
-@router.get("/")
+@router.get("/abc")
 def search(keyword: str):
     videosTitle = [] #视频标题
     keywords = " ".join(jieba.lcut(keyword, cut_all=True)).split(" ") #分割后的关键字
