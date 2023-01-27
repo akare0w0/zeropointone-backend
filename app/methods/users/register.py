@@ -15,7 +15,7 @@ async def register(email: str, account: str, password: str, confirm_password: st
         #判断密码和确认密码是否一致
         'confirmed': True,
         # 注册之前该用户是否存在
-        'beforeRegister_exists': False,
+        'exists': False,
     }
     if not isVaildEmail(email): #判断邮箱是否合法
         result['email_vaild'] = False
@@ -32,6 +32,6 @@ async def register(email: str, account: str, password: str, confirm_password: st
         if data == None: #判断用户是否已经存在
             col.insert_one({'account':account, 'password':to_sha256(password)}) 
         else:
-            result['beforeRegister_exists'] = True
+            result['exists'] = True
     
     return result
