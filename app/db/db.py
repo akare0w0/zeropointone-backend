@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-url = 'mongodb://6.tcp.cpolar.top:11004';
+url = 'mongodb://jp-tyo-ntt-1.natfrp.cloud:16412';
 
 def get_client() -> MongoClient:
     return MongoClient(url)
