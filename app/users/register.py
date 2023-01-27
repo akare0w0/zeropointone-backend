@@ -6,7 +6,7 @@ from ..sha.sha import to_sha256
 router = APIRouter(prefix="/register")
 
 @router.post('/')
-async def register(account: str, password: str, confirm_password: str):
+async def register(account: str, password: str, confirm_password: str, nickname: str):
     result = {
         'vaild':     True,
         'confirmed': True,
@@ -21,7 +21,11 @@ async def register(account: str, password: str, confirm_password: str):
         col = get_client().get_database('users').get_collection('users')
         data = col.find_one({ 'account': account })
         if data == None:
-            col.insert_one({'account':account, 'password':to_sha256(password)})
+            col.insert_one({
+                'account':  account,
+                'password': to_sha256(password),
+                'nickname': nickname,
+            })
         else:
             result['exists'] = True
     return result
