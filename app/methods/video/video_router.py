@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from .search import router as SearchRouter
+from .search_fuzz import router as SearchFuzzRouter
 
 router = APIRouter(prefix='/video')
 
-router.include_router(SearchRouter)
+router.include_router(SearchFuzzRouter)
