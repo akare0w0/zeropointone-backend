@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-url = 'mongodb://localhost:27017'
+url = 'tcp://6.tcp.cpolar.top:11004';
 
-def get_db():
-    return MongoClient(url)['db@1_23']
+def get_client() -> MongoClient:
+    return MongoClient(url)
