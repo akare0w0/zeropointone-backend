@@ -38,10 +38,13 @@ def create_video(
             'author': author,
             'upload_time': upload_time,
             'video_url': '',
-            'front_cover_url': '',
+            'front_cover_url': '', 
             'video_tags': video_tags,
             'video_comments': [],
         }).inserted_id
+
+        author = db_users.find_one({ '_id': author })
+        author['video'].append()
 
         path = abspath('..')
         vid_path = f'/locals/videos/{id}.{video.filename.split(".")[-1]}'

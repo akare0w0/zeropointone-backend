@@ -27,7 +27,6 @@ async def register(account: str, password: str, confirm_password: str, nickname:
                 'nickname': nickname,
                 'description': '这个人还没有简介欸O(∩_∩)O',
                 'level': 1,
-                'videos': [],
             })
         else:
             result['exists'] = True

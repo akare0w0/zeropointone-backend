@@ -12,16 +12,17 @@ router = APIRouter(prefix='/login')
 @router.get('/')
 async def login(account: str, password: str):
     result = {
-        'vaild':  True,
+        'valid':  True,
         'exists': True,
         'wrong':  False,
         'user':   None,
     }
-    if (not is_vaild_str(account)) or (not is_vaild_str(password)):
-        result['vaild'] = False
+    if not is_vaild_str(account) or not is_vaild_str(password):
+        result['valid'] = False
     else:
         col = get_client().get_database('users').get_collection('users')
-        data = col.find_one({ 'account': account }, { '_id': 0 })
+        data = col.find_one({ 'account': account }, { '_id': 0, 'account': 1, 'password': 1, 'nickname': 1 })
+        print(to_sha256(password))
         if data == None:
             result['exists'] = False
         elif data['password'] != to_sha256(password):

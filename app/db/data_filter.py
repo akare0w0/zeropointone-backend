@@ -6,7 +6,7 @@ filters = (
     '<', '>', '#', '^', '&', '/', '\\',
 )
 
-punc = ('。', '，', '？', '！')
+punc = ('。', '，', '？', '！', '（', '）')
 
 def is_vaild_str(string: str) -> bool:
     for i in string:
